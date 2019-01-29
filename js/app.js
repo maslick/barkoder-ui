@@ -1,3 +1,7 @@
+import Keycloak from 'keycloak-js';
+import $ from "jquery";
+import { syntaxHighlight } from './helpers';
+
 const keycloak = Keycloak({
     url: 'https://activeclouder.ijs.si/auth',
     realm: 'barkoder',
@@ -14,9 +18,7 @@ keycloak.init({ onLoad: 'login-required', checkLoginIframe: false })
         console.log(keycloak.token);
         $("#username").html(keycloak.tokenParsed.preferred_username);
         $("#username").html(keycloak.tokenParsed.given_name + " " + keycloak.tokenParsed.family_name);
-        $("#logout").click(() => {
-            keycloak.logout();
-        });
+        $("#logout").click(() => keycloak.logout());
         if (!keycloak.hasRealmRole(role)) {
             alert(keycloak.tokenParsed.preferred_username + ", you are not authorized. Contact the administrator to give you the required permissions");
             return;
@@ -24,25 +26,7 @@ keycloak.init({ onLoad: 'login-required', checkLoginIframe: false })
         getAllItems().done(items => $("#data").html(syntaxHighlight(items)));
     }).error(() => alert('failed to initialize'));
 
-function syntaxHighlight(json) {
-    if (typeof json != 'string') json = JSON.stringify(json, undefined, 2);
-    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-        let cls = 'number';
-        if (/^"/.test(match)) {
-            if (/:$/.test(match)) {
-                cls = 'key';
-            } else {
-                cls = 'string';
-            }
-        } else if (/true|false/.test(match)) {
-            cls = 'boolean';
-        } else if (/null/.test(match)) {
-            cls = 'null';
-        }
-        return '<span class="' + cls + '">' + match + '</span>';
-    });
-}
+
 
 function generateAjaxJson() {
     return {
