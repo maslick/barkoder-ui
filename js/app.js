@@ -16,6 +16,8 @@ keycloak.init({ onLoad: 'login-required', checkLoginIframe: false })
         console.log(authenticated ? 'authenticated' : 'not authenticated');
         console.log(keycloak.tokenParsed);
         console.log(keycloak.token);
+        console.log(keycloak.refreshTokenParsed);
+        console.log(keycloak.refreshToken);
         $("#username").html(keycloak.tokenParsed.preferred_username);
         $("#username").html(keycloak.tokenParsed.given_name + " " + keycloak.tokenParsed.family_name);
         $("#logout").click(() => keycloak.logout());
