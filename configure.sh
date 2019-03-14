@@ -1,4 +1,4 @@
-#!/bin/sh -eu
+#!/bin/bash -eu
 if [[ -z "${KC_URL:-}" ]]; then KC_URL="undefined"; else KC_URL=$KC_URL; fi
 if [[ -z "${REALM:-}" ]]; then REALM="undefined"; else REALM=$REALM; fi
 if [[ -z "${CLIENT_ID:-}" ]]; then CLIENT_ID="undefined"; else CLIENT_ID=$CLIENT_ID; fi
