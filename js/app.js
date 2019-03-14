@@ -3,13 +3,13 @@ import $ from "jquery";
 import { syntaxHighlight } from './helpers';
 
 const keycloak = Keycloak({
-    url: 'https://activeclouder.ijs.si/auth',
-    realm: 'barkoder',
-    clientId: 'barkoder-web'
+    url: window.kcUrl,
+    realm: window.realm,
+    clientId: window.clientId
 });
 
-const role = "craftroom";
-const base_url = "https://barkoder.herokuapp.com";
+const role = window.kcRole;
+const base_url = window.baseUrl;
 
 keycloak.init({ onLoad: 'login-required', checkLoginIframe: false })
     .success(authenticated => {
