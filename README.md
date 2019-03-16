@@ -14,7 +14,7 @@ heroku config:set \
 heroku open
 ```
 
-## Docker image
+## Docker
 ```
 s2i build \
    https://github.com/maslick/barkoder-ui.git \
