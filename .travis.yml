@@ -1,0 +1,7 @@
+dist: trusty
+services:
+  - docker
+install:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker build -t maslick/barkoder-ui:$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER -f docker/Dockerfile .
+  - docker push maslick/barkoder-ui:$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER
