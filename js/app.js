@@ -11,7 +11,7 @@ const keycloak = Keycloak({
 const role = window.kcRole;
 const base_url = window.baseUrl;
 
-if (window.kcEnabled && window.kcEnabled === true) {
+if (window.kcEnabled && window.kcEnabled.toString() === "true") {
     keycloak.init({ onLoad: 'login-required', checkLoginIframe: false })
         .success(authenticated => {
             console.log(authenticated ? 'authenticated' : 'not authenticated');
