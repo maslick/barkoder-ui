@@ -6,7 +6,7 @@
     "test": "mocha",
     "run": "parcel index.html -d test",
     "build": "rm -rf dist && parcel build js/app.js css/main.css --out-dir dist && cp js/config.js dist/js && cp index.html dist/",
-    "start": "./configure.sh > demo/js/config.js && node server.js"
+    "start": "./configure.sh > dist/js/config.js && node server.js"
   },
   "repository": {
     "type": "git",
