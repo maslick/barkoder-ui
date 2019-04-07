@@ -10,6 +10,7 @@ git clone https://github.com/maslick/barkoder-ui.git
 heroku create barkoder-ui
 git push heroku master
 heroku config:set \
+  KC_ENABLED=false \
   KC_URL=https://keycloak.io/auth \
   REALM=barkoder \
   CLIENT_ID=barkoder-web \
@@ -26,6 +27,7 @@ s2i build \
   barkoder-ui:1.0
 
 docker run -d \
+  -e KC_ENABLED=false \
   -e KC_URL=https://keycloak.io/auth \
   -e REALM=barkoder \
   -e CLIENT_ID=barkoder-web \
@@ -44,6 +46,7 @@ open http://`docker-machine ip`:8080
 docker build -t barkoder-ui:1.0 -f docker/Dockerfile .
 docker image prune --filter label=stage=intermediate -f
 docker run -d \
+    -e KC_ENABLED=false \
     -e KC_URL=https://keycloak.io/auth \
     -e REALM=barkoder \
     -e CLIENT_ID=barkoder-web \
@@ -52,4 +55,19 @@ docker run -d \
     -p 8081:80 \
     barkoder-ui:1.0
 open http://`docker-machine ip`:8081
+```
+
+## Openshift deployment
+```
+oc new-app maslick/barkoder-ui
+
+oc set env dc/barkoder-ui \
+  KC_ENABLED=false \
+  KC_URL=https://keycloak.io/auth \
+  REALM=barkoder \
+  CLIENT_ID=barkoder-web \
+  KC_ROLE=craftroom \
+  BACKEND_URL=http://barkoder.apps.example.com
+
+oc expose svc/barkoder-ui --port=80
 ```
