@@ -1,62 +1,48 @@
-import $ from "jquery";
-
 const base_url = window.baseUrl;
 
 export function getAllItems(token) {
-    return $.ajax({
-        ...generateAjaxJson(token),
-        url: base_url + "/items",
-        crossDomain: true,
-        contentType: 'application/json',
-        type: 'GET'
+    return fetch(base_url + "/items", {
+        headers: { ...authHeader(token) },
+        method: 'GET'
     });
 }
 
 export function addItem(item, token) {
-    return $.ajax({
-        ... generateAjaxJson(token),
-        url: base_url + "/item",
-        type: 'POST',
-        data: JSON.stringify(item)
+    return fetch(base_url + "/item", {
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            ...authHeader(token)
+        },
+        method: 'POST',
+        body: JSON.stringify(item)
     });
 }
 
 export function updateItem(item, token) {
-    return $.ajax({
-        ... generateAjaxJson(token),
-        url: base_url + "/item",
-        type: 'PUT',
-        data: JSON.stringify(item)
+    return fetch(base_url + "/item", {
+        headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            ...authHeader(token)
+        },
+        method: 'PUT',
+        body: JSON.stringify(item)
     });
 }
 
 export function getItem(id, token) {
-    return $.ajax({
-        ... generateAjaxJson(token),
-        url: base_url + "/item",
-        type: 'PUT',
-        data: {
-            id: id
-        }
+    return fetch(base_url + "/item/" + id, {
+        headers: { ...authHeader(token) },
+        method: 'GET'
     });
 }
 
 export function deleteItem(id, token) {
-    $.ajax({
-        ... generateAjaxJson(token),
-        url: base_url + "/item",
-        type: 'DELETE',
-        data: {
-            id: id
-        }
+    return fetch(base_url + "/item/" + id, {
+        headers: { ...authHeader(token) },
+        method: 'DELETE'
     });
 }
 
-function generateAjaxJson(token) {
-    return {
-        beforeSend: (xhr, settings) => {
-            xhr.setRequestHeader('Authorization', "bearer " + token);
-            xhr.setRequestHeader('Access-Control-Allow-Origin','*');
-        }
-    };
+function authHeader(token) {
+    return { "Authorization": "bearer " + token };
 }

@@ -1,6 +1,5 @@
 import $ from "jquery";
 import Keycloak from 'keycloak-js';
-import { syntaxHighlight } from './helpers';
 import { getAllItems } from './rest';
 
 const keycloak = Keycloak({
@@ -24,17 +23,29 @@ if (window.kcEnabled && window.kcEnabled.toString() === "true") {
                 alert(keycloak.tokenParsed.preferred_username + ", you are not authorized. Contact the administrator to give you the required permissions");
                 return;
             }
-            getAllItems(keycloak.token).done(items => items.forEach(i => drawItem(i)));
+            getAllItems(keycloak.token)
+                .then(handleErrors)
+                .then(resp => resp.json())
+                .then(items => items.forEach(i => drawItem(i)))
+                .catch(err => {
+                    console.warn("error while fetching items!");
+                });
         }).error(() => alert('failed to initialize'));
 }
 else {
     $("#logout").hide();
-    getAllItems().done(items => items.forEach(i => drawItem(i)));
+    getAllItems()
+        .then(handleErrors)
+        .then(resp => resp.json())
+        .then(items => items.forEach(i => drawItem(i)))
+        .catch(err => {
+            console.warn("error while fetching items!");
+        });
 }
 
 
 function drawItem(item) {
-    $("#data").after(
+    $("#data").append(
         "<div class='item_row'>" +
         "title: " + item.title + "<br>" +
         "category: " + item.category + "<br>" +
@@ -43,4 +54,11 @@ function drawItem(item) {
         "quantity: " + item.quantity +
         "</div>"
     );
+}
+
+function handleErrors(response) {
+    if (!response.ok) {
+        throw Error(response.statusText);
+    }
+    return response;
 }
