@@ -7,10 +7,8 @@ h1 {
 }
 
 #account {
-    /*background: #f6f6f6;*/
-    font-family: courier, monospace;
+    font-family: monospace;
     text-align: right;
-    font-size: 0.8em;
     padding: 12px;
     border-radius: 3px;
 }
@@ -28,25 +26,7 @@ h1 {
 }
 
 .key {
-    font-weight: 600;
     color: blue;
-}
-
-.string {
-}
-
-.number {
-}
-
-.boolean {
-}
-
-.null {
-}
-
-.key, .string, .null, .boolean, .number {
-    font-family: courier;
-    font-size: 0.7em;
 }
 
 * {
@@ -68,6 +48,6 @@ h1 {
     font-family: monospace;
 }
 
-.item_row:nth-child(even) {
+.item_row:nth-child(odd) {
     background: #f2f2f2;
 }

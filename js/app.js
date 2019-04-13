@@ -47,11 +47,11 @@ else {
 function drawItem(item) {
     $("#data").append(
         "<div class='item_row'>" +
-        "title: " + item.title + "<br>" +
-        "category: " + item.category + "<br>" +
-        "description: " + item.description + "<br>" +
-        "barcode: " + item.barcode + "<br>" +
-        "quantity: " + item.quantity +
+        "<span class='key'>title:</span> " + item.title + "<br>" +
+        "<span class='key'>category:</span> " + item.category + "<br>" +
+        "<span class='key'>description:</span> " + item.description + "<br>" +
+        "<span class='key'>barcode:</span> " + item.barcode + "<br>" +
+        "<span class='key'>quantity:</span> " + item.quantity +
         "</div>"
     );
 }
