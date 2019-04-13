@@ -5,7 +5,7 @@
   "scripts": {
     "test": "mocha",
     "run": "parcel index.html -d test",
-    "build": "rm -rf dist && parcel build js/app.js css/main.css --out-dir dist && cp js/config.js dist/js && cp index.html dist/",
+    "build": "rm -rf dist && parcel build js/app.js css/main.css --out-dir dist && cp js/config.js dist/js && cp index.html dist/ && cp logo.png dist/",
     "start": "./configure.sh > dist/js/config.js && node server.js"
   },
   "repository": {
