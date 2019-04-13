@@ -1,9 +1,10 @@
 h1 {
     text-align: center;
-    padding: 15px;
+    padding: 0 0 45px 0;
     margin: 0;
     font-family: 'Denk One', sans-serif;
-    font-weight: 200;
+    font-weight: 100;
+    font-style: unset;
 }
 
 #account {
@@ -46,8 +47,23 @@ h1 {
     margin: 0 auto;
     padding: 15px;
     font-family: monospace;
+    border-radius: 5px;
 }
 
 .item_row:nth-child(odd) {
     background: #f2f2f2;
+}
+
+.logo {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.logo img {
+    height: 90px;
+}
+
+#data {
+    max-width: 800px;
+    margin: 0 auto;
 }
