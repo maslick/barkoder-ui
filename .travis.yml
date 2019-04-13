@@ -4,8 +4,8 @@ services:
   - docker
 
 stages:
-  - docker
   - heroku
+  - docker
 
 jobs:
   include:
