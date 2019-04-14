@@ -23,26 +23,23 @@ if (window.kcEnabled && window.kcEnabled.toString() === "true") {
                 alert(keycloak.tokenParsed.preferred_username + ", you are not authorized. Contact the administrator to give you the required permissions");
                 return;
             }
+            startSpinner();
             getAllItems(keycloak.token)
-                .then(handleErrors)
                 .then(resp => resp.json())
                 .then(items => items.forEach(i => drawItem(i)))
-                .catch(err => {
-                    console.warn("error while fetching items!");
-                });
+                .then(() => stopSpinner())
+                .catch(catchError);
         }).error(() => alert('failed to initialize'));
 }
 else {
     $("#logout").hide();
+    startSpinner();
     getAllItems()
-        .then(handleErrors)
         .then(resp => resp.json())
         .then(items => items.forEach(i => drawItem(i)))
-        .catch(err => {
-            console.warn("error while fetching items!");
-        });
+        .then(() => stopSpinner())
+        .catch(catchError);
 }
-
 
 function drawItem(item) {
     $("#data").append(
@@ -56,9 +53,16 @@ function drawItem(item) {
     );
 }
 
-function handleErrors(response) {
-    if (!response.ok) {
-        throw Error(response.statusText);
-    }
-    return response;
+function startSpinner() {
+    $("#status").html("loading...");
+    $("#status").css("visibility", "visible");
+}
+
+function stopSpinner() {
+    $("#status").css("visibility", "hidden");
+}
+
+function catchError(err) {
+    console.warn("error while fetching items :(");
+    $("#status").html("error while fetching items :(");
 }
