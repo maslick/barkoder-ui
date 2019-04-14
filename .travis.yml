@@ -4,8 +4,10 @@ services:
   - docker
 
 stages:
-  - heroku
-  - docker
+  - name: heroku
+    if: branch == master
+  - name: docker
+    if: branch == master
 
 jobs:
   include:
