@@ -1,4 +1,6 @@
 # barkoder-ui
+<img src="./logo.png" width="80">
+
 HTML5 client for [barkoder](https://github.com/maslick/barkoder)
 
 [![Build Status](https://travis-ci.org/maslick/barkoder-ui.svg?branch=master)](https://travis-ci.org/maslick/barkoder-ui)
