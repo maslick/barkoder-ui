@@ -16,8 +16,9 @@ jobs:
       script:
         - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
         - docker build -t maslick/barkoder-ui:$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER -f docker/Dockerfile .
-        - docker tag maslick/barkoder-ui:$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER maslick/barkoder-ui
-        - docker push maslick/barkoder-ui:$TRAVIS_BRANCH-$TRAVIS_BUILD_NUMBER
+        - VER=$TRAVIS_BRANCH-build$TRAVIS_BUILD_NUMBER-`git rev-parse --short HEAD`
+        - docker tag maslick/barkoder-ui:$VER maslick/barkoder-ui
+        - docker push maslick/barkoder-ui:$VER
         - docker push maslick/barkoder-ui
     - stage: heroku
       name: "Deploy to Heroku"
