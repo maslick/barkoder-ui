@@ -1,12 +1,13 @@
 {
   "name": "barkoder-ui",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "HTML5 client for barkoder",
   "scripts": {
-    "test": "mocha",
-    "run": "parcel index.html -d test",
-    "build": "rm -rf dist && parcel build js/app.js css/main.css --out-dir dist && cp js/config.js dist/js && cp index.html dist/ && cp logo.png dist/",
-    "start": "./configure.sh > dist/js/config.js && node server.js"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "dev": "./configure.sh > build/config.js && node server.js"
   },
   "repository": {
     "type": "git",
@@ -17,16 +18,25 @@
   "bugs": {
     "url": "https://github.com/maslick/barkoder-ui/issues"
   },
-  "homepage": "https://github.com/maslick/barkoder-ui#readme",
   "devDependencies": {
-    "mocha": "^5.2.0",
-    "parcel": "^1.12.3",
-    "sass": "^1.18.0"
+    "mocha": "^5.2.0"
   },
   "dependencies": {
-    "keycloak-js": "^4.8.3",
+    "keycloak-js": "^6.0.1",
     "jquery": "^3.4.0",
     "serve-static": "^1.13.2",
-    "connect": "^3.6.6"
-  }
+    "connect": "^3.6.6",
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "3.0.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not op_mini all"
+  ]
 }

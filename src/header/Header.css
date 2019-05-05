@@ -1,0 +1,43 @@
+#account {
+    font-family: monospace;
+    text-align: right;
+    padding: 12px;
+    border-radius: 3px;
+}
+
+#username {
+    font-weight: bold;
+}
+
+#logout {
+    text-decoration: none;
+}
+
+#logout:hover {
+    color: red;
+}
+
+.logo {
+    padding-top: 30px;
+    text-align: center;
+}
+
+.logo img {
+    height: 90px;
+}
+
+h1 {
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    font-family: 'Denk One', sans-serif;
+    font-weight: 100;
+    font-style: unset;
+}
+
+#status {
+    text-align: center;
+    padding: 20px;
+    font-family: monospace;
+    visibility: hidden;
+}
