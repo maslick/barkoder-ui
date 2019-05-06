@@ -6,7 +6,7 @@ RUN npm install && npm run build
 
 FROM nginx
 WORKDIR /usr/share/nginx/html/
-COPY --from=builder /tmp/dist ./
+COPY --from=builder /tmp/build ./
 COPY --from=builder /tmp/configure.sh ./
 COPY --from=builder /tmp/docker/nginx.sh ./
 RUN chmod +x configure.sh
