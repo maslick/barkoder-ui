@@ -5,6 +5,7 @@ WORKDIR /tmp
 RUN npm install && npm run build
 
 FROM nginx
+USER 1000
 WORKDIR /usr/share/nginx/html/
 COPY --from=builder /tmp/build ./
 COPY --from=builder /tmp/configure.sh ./
