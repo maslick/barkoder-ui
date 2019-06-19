@@ -24,8 +24,8 @@ heroku open
 ## s2i
 ```
 s2i build \
-  https://github.com/maslick/barkoder-ui.git \
-  registry.access.redhat.com/rhscl/nodejs-8-rhel7 \
+  https://github.com/maslick/barkoder-ui.git -r react \
+  nodeshift/centos7-s2i-nodejs:11.0.0 \
   barkoder-ui:1.0
 
 docker run -d \
@@ -43,7 +43,9 @@ open http://`docker-machine ip`:8080
 ```
 
 ## Docker multistage build
-[Here](docker/Dockerfile) I'm using ``node:8`` image as build image and ``nginx`` as runtime image. This reduces image size from ~500Mb to 100Mb.
+[Here](docker/Dockerfile) I'm using ``node:12`` image as build image and ``nginx`` as runtime image. This reduces image size from ~500Mb to 100Mb.
+Also, since Openshift runs containers using an arbitrarily assigned user ID, we have to start nginx as non-root user.
+You can build the image yourself:
 ```
 docker build -t barkoder-ui:1.0 -f docker/Dockerfile .
 docker image prune --filter label=stage=intermediate -f
@@ -54,8 +56,24 @@ docker run -d \
     -e CLIENT_ID=barkoder-web \
     -e KC_ROLE=craftroom \
     -e BACKEND_URL=https://barkoder.io \
-    -p 8081:80 \
+    -p 8081:8080 \
     barkoder-ui:1.0
+```
+
+Or fetch one from Dockerhub:
+```
+docker run -d \
+    -e KC_ENABLED=false \
+    -e KC_URL=https://keycloak.io/auth \
+    -e REALM=barkoder \
+    -e CLIENT_ID=barkoder-web \
+    -e KC_ROLE=craftroom \
+    -e BACKEND_URL=https://barkoder.io \
+    -p 8081:8080 \
+    maslick/barkoder-ui
+```
+
+```
 open http://`docker-machine ip`:8081
 ```
 
@@ -71,5 +89,5 @@ oc set env dc/barkoder-ui \
   KC_ROLE=craftroom \
   BACKEND_URL=http://barkoder.apps.example.com
 
-oc expose svc/barkoder-ui --port=80
+oc expose svc/barkoder-ui --port=8080
 ```
