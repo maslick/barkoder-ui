@@ -26,4 +26,5 @@ RUN touch /var/run/nginx.pid && \
     chmod -R 775 /var/www
 
 USER www-data
+EXPOSE 8080
 CMD ./nginx.sh
