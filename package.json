@@ -3,7 +3,7 @@
   "version": "2.0.0",
   "description": "HTML5 client for barkoder",
   "scripts": {
-    "start": "./configure.sh > build/config.js react-scripts start",
+    "start": "./configure.sh > build/config.js && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
