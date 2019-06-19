@@ -1,5 +1,5 @@
 #!/bin/sh -eu
 
-./configure.sh > /usr/share/nginx/html/config.js
+./configure.sh > /var/www/config.js
 echo Starting nginx
 nginx -g "daemon off;"
