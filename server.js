@@ -1,7 +1,17 @@
-let connect = require('connect');
-let serveStatic = require('serve-static');
+const express = require('express');
+const path = require('path');
 
-let port = process.env.PORT || 9990;
-connect().use(serveStatic("build/")).listen(port, "0.0.0.0", () => {
-    console.log('Server running on port ' + port);
+const app = express();
+
+// Serve static assets
+app.use(express.static(path.resolve(__dirname, 'build')));
+
+// Always return index.html, react-router takes control
+app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'build', 'index.html'));
+});
+
+const PORT = process.env.PORT || 9990;
+app.listen(PORT, () => {
+    console.log(`App listening on port ${PORT}!`);
 });
