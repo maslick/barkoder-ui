@@ -20,7 +20,7 @@
   "homepage": "https://github.com/maslick/barkoder-ui#readme",
   "devDependencies": {
     "mocha": "^5.2.0",
-    "parcel": "^1.12.3",
+    "parcel": "^1.12.4",
     "sass": "^1.18.0"
   },
   "dependencies": {
